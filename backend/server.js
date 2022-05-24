@@ -1,42 +1,40 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const logger = require('./middlewares/logger');
+const auth = require('./middlewares/auth')
+const errorHandler = require('./middlewares/errorHandler')
+// const {logger} = require('./middlewares/logger')
 
 const app = express();
 const port = process.env.PORT;
 
-const corsOptions = {
-    origin: process.env.APP_URL,
-    optionsSuccessStatus: 200,
-};
+app.use(
+    cors({
+        origin: process.env.APP_URL,
+    })
+);
+app.use(express.json());
 
-const myLogger = (req, res, next) => {
-    console.log('Épp logolok...');
-    next(); //ezzel hívom meg a következő middleware functiont (a myAuth-ot);
-};
+app.use(logger);
+// app.use(auth); // ha az app.use-nál meghívom az authot, az már a middleware functiont adja vissza
 
-const myAuth = (req, res, next) => {
-    console.log('Épp autentikálok...');
-    const userId = 12;
-    res.locals.userId = userId;
-    next();
-};
+app.get('/api/public', (req, res) => {
+    console.log('public');
+    res.send('Hello World Public!');
+})
+    
+app.get('/api/private', auth({ block: true }), (req, res) => {
+    console.log('private');
+    res.send(`Hello World Private id: ${res.locals.userId}`);
+})
 
-const myBusinessLogic = (req, res) => {
-    if (!res.locals.userId) return res.sendStatus(401);
-    console.log('Épp fut a logikám...');
-    res.status(200).json('Oké');
-}
-
-app.use(myLogger);
-app.use(myAuth);
-app.use(myBusinessLogic);
-// app.use(cors(corsOptions));
-// app.use(express.json());
-
-// app.get('/', (req, res) => {
-//   res.send('Hello World!')
-// })
+app.get('/api/prublic', auth({ block: false }), (req, res) => {
+    if (!res.locals.userId) return res.send('hello world public');
+    res.send(`hello world prublic, your id is: ${res.locals.userId}`);
+})
+    
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
