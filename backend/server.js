@@ -1,10 +1,12 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const logger = require('./middlewares/logger');
-const auth = require('./middlewares/auth')
-const errorHandler = require('./middlewares/errorHandler')
-// const {logger} = require('./middlewares/logger')
+const mongoose = require('mongoose');
+const logger = require('./middleware/logger');
+const auth = require('./middleware/auth')
+const errorHandler = require('./middleware/errorHandler');
+const { default: mongoose } = require("mongoose");
+// const {logger} = require('./middleware/logger')
 
 const app = express();
 const port = process.env.PORT;
@@ -14,7 +16,7 @@ app.use(
         origin: process.env.APP_URL,
     })
 );
-app.use(express.json());
+app.use(express.json()); //A bodyban érkező jsont parse-olni tudja.
 
 app.use(logger);
 // app.use(auth); // ha az app.use-nál meghívom az authot, az már a middleware functiont adja vissza
@@ -36,6 +38,8 @@ app.get('/api/prublic', auth({ block: false }), (req, res) => {
     
 app.use(errorHandler);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+mongoose.connect('mongodb://localhost:27017/templateDB', () => {
+    app.listen(port, () => {
+      console.log(`Listening on port ${port}`)
+    });
+});
