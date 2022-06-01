@@ -20,7 +20,7 @@ const config = {
 
 }
 
-router.post('/login', async (req, res) => {
+router.post('/api/login', async (req, res) => {
     const payload = req.body;
     if (!payload) return res.sendStatus(400);
 
@@ -52,7 +52,7 @@ router.post('/login', async (req, res) => {
     // if user exists ? send jwt token : create user and send jwt
 });
 
-router.post('/login', async (req, res) => {
+router.post('/api/login', async (req, res) => {
     
 });
 
