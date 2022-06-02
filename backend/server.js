@@ -4,8 +4,18 @@ const app = require('./app');
 
 const port = process.env.PORT;
 
-mongoose.connect('mongodb://localhost:27017/templateDB', () => {
-    app.listen(port, () => {
-      console.log(`Listening on port ${port}`)
-    });
+mongoose
+.connect(process.env.MONGO, {useNewUrlParser: true,
+  useUnifiedTopology: true,
+  // useFindAndModify: false
+  // , useCreateIndex: true
+}, 
+)
+.then(() => {
+  console.log("MongoDB connected");
+})
+.catch((error) => console.log(error));
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`)
 });

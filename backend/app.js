@@ -6,6 +6,7 @@ const auth = require('./middleware/auth')
 const errorHandler = require('./middleware/errorHandler');
 // const {logger} = require('./middleware/logger')
 const dashboardRoute = require('./route/dashboard');
+const userRoute = require('./route/user');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(logger);
 // app.use(auth); // ha az app.use-nál meghívom az authot, az már a middleware functiont adja vissza
 
 app.use('/api/dashboards', dashboardRoute);
+app.use('/api/user', userRoute);
 
 app.get('/api/public', (req, res) => {
     console.log('public');
@@ -35,7 +37,7 @@ app.get('/api/prublic', auth({ block: false }), (req, res) => {
     if (!res.locals.userId) return res.send('hello world public');
     res.send(`hello world prublic, your id is: ${res.locals.userId}`);
 })
-    
+
 app.use(errorHandler);
 
 module.exports = app;
