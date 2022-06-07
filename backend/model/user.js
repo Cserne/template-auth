@@ -18,12 +18,14 @@ const userSchema = new mongoose.Schema({
     providers: {
         google: {
             type: String,
-            unique: true,
         },
-        facebook: {
+        github: {
             type: String,
-            unique: true,
-        }
+        },
+        // facebook: {
+        //     type: String,
+        //     unique: true,
+        // }
     },
     // password: { type: String, required: true }, // empty string NONO! + validation
     dashboards: [dashboardSchema], // empty list is default?

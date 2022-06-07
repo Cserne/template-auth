@@ -6,16 +6,28 @@ const http = ( baseurl ) => {
         timeout: 3000,
       });
 
-    const post = async(url, body) => {
+    const post = async(...params) => {
         try {
-            const response = await instance.post(url, body);
+            const response = await instance.post(...params);
             return response;
         } catch (error) {
-            console.log(error);
+            console.log(error.response.status);
+            console.log(error.response.data);
             return error.response;
         }
     }
-    return { post }
+
+    const get = async(...params) => {
+        try {
+            const response = await instance.get(...params);
+            return response;
+        } catch (error) {
+            console.log(error.response.status);
+            console.log(error.response.data);
+            return error.response;
+        }
+    }
+    return { post, get }
 }
 
 module.exports = http;
