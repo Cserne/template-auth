@@ -1,5 +1,7 @@
+require('dotenv').config();
 const app = require('../app');
 const mockserver = require('supertest');
+const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require ('mongodb-memory-server');
 const User = require('../model/user');
@@ -29,9 +31,13 @@ describe('/api/dashboard get tests', () => {
 
     test('test user gets empty list', async () => {
         // given
-        const newUser = new User({ username: 'Cirmi', googleID: '123456' });
+        const newUser = new User({
+            username: 'Cirmi',
+        });
         await newUser.save();
-        client.set('authorization', newUser._id);
+
+        const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET);
+        client.set('authorization', token);
     
         // when
         const response = await client.get('/api/dashboards');
@@ -44,10 +50,13 @@ describe('/api/dashboard get tests', () => {
 
     test('deleted user receives null', async () => {
         // given
-        const newUser = new User({ username: 'Cirmi', googleID: '123456' });
+        const newUser = new User({
+            username: 'Cirmi',
+        });
         await newUser.save();
-        client.set('authorization', newUser._id);
 
+        const token = jwt.sign({userId: newUser._id}, process.env.JWT_SECRET);
+        client.set('authorization', token);
         await User.deleteMany();
     
         // when

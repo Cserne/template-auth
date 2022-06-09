@@ -1,5 +1,7 @@
+const logger = require('../utils/logger');
+
 const errorHandler = (err, req, res, next) => {
-    console.log(err);
+    logger.error(new Error("render error"), error.toString());
     res.status(500).json('Something went wrong'); //ha nincs mögötte .json, akkor sendStatus van status helyett
 }
 
