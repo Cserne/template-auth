@@ -41,6 +41,6 @@ app.get('/api/prublic', auth({ block: false }), (req, res) => {
     res.send(`hello world prublic, your id is: ${res.locals.userId}`);
 })
 
-app.use(errorHandler);
+app.use(errorHandler); // Utolsónak kell lennie.
 
 module.exports = app;
