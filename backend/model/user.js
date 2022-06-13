@@ -18,9 +18,13 @@ const userSchema = new mongoose.Schema({
     providers: {
         google: {
             type: String,
+            sparse:true,
+            unique: true,
         },
         github: {
             type: String,
+            sparse:true,
+            unique: true,
         },
         // facebook: {
         //     type: String,
