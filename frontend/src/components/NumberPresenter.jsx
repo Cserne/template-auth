@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCounter } from './CounterProvider';
+import { useCounter } from '../providers/counter';
 
 
 const NumberPresenter = () => {

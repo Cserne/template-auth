@@ -1,6 +1,6 @@
 import React from 'react'
 import NumberPresenter from './NumberPresenter';
-import { useCounter } from './CounterProvider';
+import { useCounter } from '../providers/counter';
 
 const NumberModifier = () => {
     const { increment, decrement } = useCounter();
