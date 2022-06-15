@@ -1,6 +1,5 @@
 import './App.css'
 import React from 'react';
-
 // import NumberPresenter from './components/NumberPresenter';
 // import NumberModifier from './components/NumberModifier';
 // import { useCounter } from './components/CounterProvider';
@@ -9,6 +8,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Profile from './pages/Profile';
 import { Navbar } from './components/Navbar';
+import Callback from './pages/Callback';
 
 const App = () => {
     // const {value, increment, decrement} = useCounter();
@@ -20,6 +20,7 @@ const App = () => {
               <Route path='/' element={<Home/>}/>
               <Route path='/about' element={<About/>}/>
               <Route path='/profile' element={<Profile/>}/>
+              <Route path='/callback' element={<Callback/>}/>
             </Routes>
             {/* <p>Change the value</p>
             <button onClick={increment}>+</button>
