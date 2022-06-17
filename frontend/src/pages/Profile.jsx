@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+// import { useNavigate } from 'react-router-dom';
 import { useCounter } from '../hooks/useCounter';
 import { useCounter as useGlobalCounter} from '../providers/counter';
 import { useAuth } from '../providers/auth';
@@ -7,7 +8,15 @@ const Profile = () => {
   const {counter, increment, decrement} = useCounter("Profile");
   const {value, increment: goUp, decrement: goDown} = useGlobalCounter();
   const {token} = useAuth();
-  console.log(token);
+  // const navigate = useNavigate();
+  // console.log(token);
+
+  // useEffect(() => {
+  //   if (!token) {
+  //     navigate('/')
+  //   }
+  // }, [])
+  
 
   return (
     <>

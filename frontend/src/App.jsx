@@ -9,27 +9,32 @@ import About from './pages/About';
 import Profile from './pages/Profile';
 import { Navbar } from './components/Navbar';
 import Callback from './pages/Callback';
+import Protected from './components/Protected';
 
 const App = () => {
     // const {value, increment, decrement} = useCounter();
 
   return (
-        <div className='App'>
-          <Navbar/>
-            <Routes>
-              <Route path='/' element={<Home/>}/>
-              <Route path='/about' element={<About/>}/>
-              <Route path='/profile' element={<Profile/>}/>
-              <Route path='/callback' element={<Callback/>}/>
-            </Routes>
-            {/* <p>Change the value</p>
-            <button onClick={increment}>+</button>
-            <p>value: {value}</p>
-            <button onClick={decrement}>-</button>
+    <div className='App'>
+      <Navbar/>
+        <Routes>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/about' element={<About/>}/>
+          <Route path='/profile' element={(
+            <Protected>
+              <Profile/>
+            </Protected>
+          )}/>
+          <Route path='/callback' element={<Callback/>}/>
+        </Routes>
+        {/* <p>Change the value</p>
+        <button onClick={increment}>+</button>
+        <p>value: {value}</p>
+        <button onClick={decrement}>-</button>
 
-            <NumberPresenter />
-            <NumberModifier /> */}
-        </div>
+        <NumberPresenter />
+        <NumberModifier /> */}
+    </div>
   )
 }
 
