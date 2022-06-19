@@ -7,17 +7,18 @@ const Callback = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const loginWithCode = async() => {
+      const loginWithCode = async() => {
 
-            const params = new URLSearchParams(window.location.search);
-            const code = params.get('code');
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
 
-            if (code) {
-                await login(code, "google");
-            }
-            navigate('/')
+        if (code) {
+          console.log(code);
+            await login(code, "google");
         }
-        loginWithCode();
+        navigate('/profile') //Ha megvan a belépés, akkor átvisz a profile oldalra.
+      }
+      loginWithCode();
     }, [])
     
   return (

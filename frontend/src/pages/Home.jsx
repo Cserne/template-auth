@@ -21,7 +21,7 @@ const Home = () => {
       <button onClick={goDown}>-</button>
       <p>Value: {value}</p>
 
-      <button onClick={auth}>Login with Google</button>
+      {token ? 'Welcome' : <button onClick={auth}>Login with Google</button>}
     </>
   )
 }

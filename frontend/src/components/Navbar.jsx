@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../providers/auth';
 
-export const Navbar = () => {
+const Navbar = () => {
   const navigate = useNavigate();
   const {auth, logout, token} = useAuth();
 
