@@ -2,7 +2,8 @@ import axios from 'axios';
 
 export const todoApi = () => {
     const instance = axios.create({
-        baseURL: "http://localhost:4000/api",
+        // baseURL: "http://localhost:4000/api",
+        baseURL: "http://localhost:8080/api",
         timeout: 3000,
       });
 
@@ -38,4 +39,5 @@ export const todoApi = () => {
         }
     }
     return { post, get }
+    // return { post, get, _instance: instance }
 };

@@ -1,6 +1,8 @@
 //egy komponens, ami csak a gyerek komponenseit rendereli le
-import React, { useEffect } from "react";
-import { useNavigate, Navigate, useLocation } from "react-router-dom";
+// import React, { useEffect } from "react";
+// import { useNavigate, Navigate, useLocation } from "react-router-dom";
+import React from "react";
+import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../providers/auth";
 
 //speciális props-t kap

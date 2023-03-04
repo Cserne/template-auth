@@ -13,8 +13,8 @@ const Callback = () => {
         const code = params.get('code');
 
         if (code) {
-          console.log(code);
-            await login(code, "google");
+          console.log("Beléptem",code);
+          await login(code, "google");
         }
         navigate('/profile') //Ha megvan a belépés, akkor átvisz a profile oldalra.
       }

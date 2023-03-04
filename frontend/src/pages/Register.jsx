@@ -24,6 +24,7 @@ const Register = () => {
 
   return (
     <div>
+        <h2>Add username to register</h2>
         <input type='text' value={username} onChange={(e) => setUsername(e.target.value)}/>
         <button onClick={() => register(username)}>Register</button>
     </div>
